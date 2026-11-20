@@ -1,0 +1,68 @@
+
+import { Suspense } from "react";
+
+import { getAllBarang } from "@/lib/services/barang.service";
+import { StokKeluarForm } from "./form";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+async function FormContent() {
+  const data = await getAllBarang();
+
+  // Ubah hasil query menjadi plain object
+  // sebelum dikirim ke Client Component
+  const barang = data.map((item) => ({
+    id: item.id,
+    sku: item.sku,
+    nama: item.nama,
+    satuan: item.satuan,
+    stok: item.stok,
+  }));
+
+  return (
+    <Card className="max-w-2xl">
+      <CardHeader>
+        <CardTitle>Form Pengeluaran Barang</CardTitle>
+
+        <CardDescription>
+          Catat pengurangan stok dan riwayat
+          transaksi barang gudang.
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent>
+        <StokKeluarForm barang={barang} />
+      </CardContent>
+    </Card>
+  );
+}
+
+export default function StokKeluarPage() {
+  return (
+    <div className="space-y-6 px-4 py-6 lg:px-6">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight">
+          Barang Keluar
+        </h1>
+
+        <p className="text-muted-foreground">
+          Kelola pengeluaran stok barang gudang.
+        </p>
+      </div>
+
+      <Suspense
+        fallback={
+          <div className="h-80 max-w-2xl animate-pulse rounded-xl bg-muted" />
+        }
+      >
+        <FormContent />
+      </Suspense>
+    </div>
+  );
+}
