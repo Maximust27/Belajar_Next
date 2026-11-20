@@ -42,6 +42,6 @@ DB_NAME=
 - `app/(admin)/` — halaman dashboard dan transaksi, dilengkapi sidebar.
 - `lib/services/` — query dan logika akses database.
 - `app/(admin)/**/actions.ts` — Server Actions dan validasi input dengan Zod.
-- `app/globals.css` dan `postcss.config.mjs` — Tailwind CSS v4 dan shadcn/ui.
+- `app/globals.css`, `app/shadcn-utilities.css`, dan `postcss.config.mjs` — Tailwind CSS v4 dan utilitas shadcn/ui (di-vendor dari versi 4.23.0 agar CLI `shadcn` tidak ikut terpasang).
 
 **Catatan keamanan:** area admin belum dilindungi autentikasi/otorisasi. Tambahkan akses pengguna dan pengujian transaksi sebelum digunakan di production publik.
