@@ -185,3 +185,21 @@ html {
     transition: none !important;
   }
 }
+
+/*
+ * Anti-flash scroll reveal:
+ * - Elements are hidden by CSS before hydration, so no visible -> invisible blink.
+ * - Web Animations API reveals each once; JS sets data-motion-state="shown".
+ * - No-JS, unsupported browsers and reduced-motion users keep visible content.
+ */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  :root:not([data-motion-disabled="true"]) [data-motion]:not([data-motion-state="shown"]) {
+    opacity: 0;
+  }
+}
+
+@media print {
+  [data-motion] {
+    opacity: 1 !important;
+  }
+}

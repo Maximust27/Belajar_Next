@@ -59,13 +59,20 @@ const durations: Record<string, number> = {
  */
 export function MotionObserver() {
   useEffect(() => {
-    if (!("IntersectionObserver" in window) || !Element.prototype.animate) {
+    // CSS hides targets before the first paint. If this browser cannot
+    // animate them, remove the concealment rather than leaving blank content.
+    if (
+      !window.matchMedia("(scripting: enabled)").matches ||
+      !("IntersectionObserver" in window) ||
+      !Element.prototype.animate
+    ) {
+      document.documentElement.dataset.motionDisabled = "true";
       return;
     }
 
     const media = window.matchMedia(REDUCED_MOTION_QUERY);
     const registered = new WeakSet<Element>();
-    const running = new Set<Animation>();
+    const running = new Map<Animation, HTMLElement>();
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -75,7 +82,12 @@ export function MotionObserver() {
           const element = entry.target as HTMLElement;
           observer.unobserve(element);
 
-          if (media.matches) continue;
+          if (element.dataset.motionState === "shown") continue;
+
+          if (media.matches) {
+            element.dataset.motionState = "shown";
+            continue;
+          }
 
           const preset = element.dataset.motion ?? "rise";
           const frames = keyframes[preset] ?? keyframes.rise;
@@ -91,9 +103,12 @@ export function MotionObserver() {
             fill: "both",
           });
 
-          running.add(animation);
+          running.set(animation, element);
           void animation.finished.then(
             () => {
+              // Set the final CSS state BEFORE removing the WAAPI fill.
+              // Otherwise the element briefly returns to opacity: 0.
+              element.dataset.motionState = "shown";
               animation.cancel();
               running.delete(animation);
             },
@@ -105,7 +120,7 @@ export function MotionObserver() {
     );
 
     const observe = (element: Element) => {
-      if (registered.has(element)) return;
+      if (registered.has(element) || (element as HTMLElement).dataset.motionState === "shown") return;
       registered.add(element);
       observer.observe(element);
     };
@@ -129,7 +144,10 @@ export function MotionObserver() {
 
     const onMotionPreferenceChange = () => {
       if (media.matches) {
-        running.forEach((animation) => animation.cancel());
+        running.forEach((element, animation) => {
+          element.dataset.motionState = "shown";
+          animation.cancel();
+        });
         running.clear();
       }
     };
@@ -139,7 +157,10 @@ export function MotionObserver() {
       mutations.disconnect();
       observer.disconnect();
       media.removeEventListener("change", onMotionPreferenceChange);
-      running.forEach((animation) => animation.cancel());
+      running.forEach((element, animation) => {
+        element.dataset.motionState = "shown";
+        animation.cancel();
+      });
       running.clear();
     };
   }, []);
