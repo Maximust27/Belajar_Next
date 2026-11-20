@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Inventra
 
-## Getting Started
+Sistem manajemen inventaris berbasis **Next.js 16**, **React 19**, **TypeScript**, **Tailwind CSS v4**, **shadcn/ui**, dan **MariaDB/MySQL**.
 
-First, run the development server:
+## Fitur
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Landing page publik di `/`.
+- Dashboard stok di `/dashboard`.
+- Pengelolaan data barang di `/barang`.
+- Pencatatan stok masuk dan stok keluar di `/stok-masuk` dan `/stok-keluar`.
+- Riwayat transaksi di `/riwayat`.
+
+## Menjalankan secara lokal
+
+Persyaratan: Node.js yang kompatibel dengan Next.js 16, npm, serta database MySQL/MariaDB.
+
+1. Install dependensi: `npm ci`.
+2. Buat file `.env.local` di root project dan isi konfigurasi database sesuai lingkungan lokal.
+3. Pastikan tabel database `barang` dan `stock_movements` tersedia. Repositori ini **belum menyertakan migrasi/schema SQL**.
+4. Jalankan `npm run dev` dan buka http://localhost:3000.
+
+Contoh nama variabel lingkungan (isi nilainya sendiri; jangan commit kredensial):
+
+```dotenv
+DB_HOST=
+DB_PORT=3306
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Kualitas kode
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `npm run lint` — pemeriksaan ESLint.
+- `npx tsc --noEmit` — pemeriksaan tipe TypeScript.
+- `npm run build` — build production. Halaman yang membaca database membutuhkan konfigurasi dan data database yang benar.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Struktur utama
 
-## Learn More
+- `app/page.tsx` — pintu masuk landing page, metadata SEO.
+- `components/landing/` — UI landing page dan ilustrasi.
+- `app/(admin)/` — halaman dashboard dan transaksi, dilengkapi sidebar.
+- `lib/services/` — query dan logika akses database.
+- `app/(admin)/**/actions.ts` — Server Actions dan validasi input dengan Zod.
+- `app/globals.css`, `app/shadcn-utilities.css`, dan `postcss.config.mjs` — Tailwind CSS v4 dan utilitas shadcn/ui (di-vendor dari versi 4.23.0 agar CLI `shadcn` tidak ikut terpasang).
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Catatan keamanan:** area admin belum dilindungi autentikasi/otorisasi. Tambahkan akses pengguna dan pengujian transaksi sebelum digunakan di production publik.

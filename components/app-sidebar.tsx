@@ -1,15 +1,18 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { NavDocuments } from "@/components/nav-documents"
-import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
+import type { ComponentProps } from "react";
+import Link from "next/link";
 import { Suspense } from "react";
-import { ArrowDownToLine } from "lucide-react";
-import { ArrowUpFromLine } from "lucide-react";
-import { History } from "lucide-react";
+import {
+  ArrowDownToLine,
+  ArrowUpFromLine,
+  Boxes,
+  History,
+  House,
+  LayoutDashboard,
+  Package,
+} from "lucide-react";
+import { NavMain } from "@/components/nav-main";
 import {
   Sidebar,
   SidebarContent,
@@ -18,181 +21,50 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { LayoutDashboardIcon, ListIcon, ChartBarIcon, FolderIcon, UsersIcon, CameraIcon, FileTextIcon, Settings2Icon, CircleHelpIcon, SearchIcon, DatabaseIcon, FileChartColumnIcon, FileIcon, CommandIcon } from "lucide-react"
+} from "@/components/ui/sidebar";
 
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "/dashboard",
-      icon: LayoutDashboardIcon,
-    },
-    {
-      title: "Data Barang",
-      url: "/barang",
-      icon: DatabaseIcon,
-    },
-    {
-      title: "Barang Masuk",
-      url: "/stok-masuk",
-      icon: ArrowDownToLine,
-    },
-    {
-      title: "Barang Keluar",
-      url: "/stok-keluar",
-      icon: ArrowUpFromLine,
-    },
-    {
-      title: "Riwayat Transaksi",
-      url: "/riwayat",
-      icon: History,
-    },
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: (
-        <CameraIcon
-        />
-      ),
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: (
-        <FileTextIcon
-        />
-      ),
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: (
-        <FileTextIcon
-        />
-      ),
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Settings",
-      url: "#",
-      icon: (
-        <Settings2Icon
-        />
-      ),
-    },
-    {
-      title: "Get Help",
-      url: "#",
-      icon: (
-        <CircleHelpIcon
-        />
-      ),
-    },
-    {
-      title: "Search",
-      url: "#",
-      icon: (
-        <SearchIcon
-        />
-      ),
-    },
-  ],
-  documents: [
-    {
-      name: "Data Library",
-      url: "#",
-      icon: (
-        <DatabaseIcon
-        />
-      ),
-    },
-    {
-      name: "Reports",
-      url: "#",
-      icon: (
-        <FileChartColumnIcon
-        />
-      ),
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: (
-        <FileIcon
-        />
-      ),
-    },
-  ],
-}
+const navigation = [
+  { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+  { title: "Data Barang", url: "/barang", icon: Package },
+  { title: "Stok Masuk", url: "/stok-masuk", icon: ArrowDownToLine },
+  { title: "Stok Keluar", url: "/stok-keluar", icon: ArrowUpFromLine },
+  { title: "Riwayat", url: "/riwayat", icon: History },
+];
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar(props: ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:p-1.5!"
-            >
-              <a href="/dashboard">
-                <CommandIcon className="size-5!" />
-                <span className="text-base font-semibold">PT Distribusi JNE</span>
-              </a>
+            <SidebarMenuButton asChild size="lg">
+              <Link href="/dashboard" aria-label="Inventra Dashboard">
+                <Boxes className="size-5" aria-hidden="true" />
+                <span className="text-base font-semibold">Inventra</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
         <Suspense fallback={null}>
-          <NavMain items={data.navMain} />
+          <NavMain items={navigation} />
         </Suspense>
-        <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
+
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild tooltip="Beranda">
+              <Link href="/">
+                <House aria-hidden="true" />
+                <span>Kembali ke beranda</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
