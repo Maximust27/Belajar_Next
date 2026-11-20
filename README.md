@@ -56,3 +56,21 @@ DB_NAME=
 - Konten tetap terlihat saat JavaScript nonaktif; `prefers-reduced-motion` dihormati.
 
 Tambahkan `data-motion="rise"`, `"pop"`, `"fade"`, atau `"left"` pada elemen HTML dan gunakan `data-motion-delay={100}` untuk jeda opsional (milidetik). Hindari animasi setiap baris tabel besar.
+
+## Typography / design system
+
+Skala font untuk dashboard Inventra dipusatkan di **`app/globals.css`**, pada token `--type-*`.
+Default: sidebar 280px; menu 15px dengan tinggi 40px; body 14px; judul halaman 24px; judul kartu 16px; caption 12px; metrik 30px.
+
+Gunakan komponen reusable `components/ui/typography.tsx`:
+
+```tsx
+import { Heading, Text, Caption } from "@/components/ui/typography";
+
+<Heading as="h1" size="page">Dashboard</Heading>
+<Text tone="muted">Deskripsi halaman</Text>
+<Heading as="h2" size="section">Ringkasan</Heading>
+<Caption>Terakhir diperbarui</Caption>
+```
+
+Semua class `text-app-*` membaca token yang sama. Landing page mempertahankan tipografi display editorialnya sendiri.

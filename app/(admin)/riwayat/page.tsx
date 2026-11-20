@@ -1,5 +1,6 @@
 
 import { Suspense } from "react";
+import { Heading, Text } from "@/components/ui/typography";
 import Link from "next/link";
 import { ChevronDown, Search, RotateCcw } from "lucide-react";
 
@@ -335,14 +336,13 @@ export default function RiwayatPage({
     <div className="flex flex-col gap-6 px-4 py-6 lg:px-6">
       {/* PAGE HEADER */}
       <div data-motion="rise" className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight">
+        <Heading as="h1" size="page">
           Riwayat Transaksi
-        </h1>
-
-        <p className="text-sm text-muted-foreground">
+        </Heading>
+          <Text tone="muted">
           Monitoring seluruh aktivitas barang masuk
           dan keluar di gudang.
-        </p>
+        </Text>
       </div>
 
       {/* PAGE CONTENT */}

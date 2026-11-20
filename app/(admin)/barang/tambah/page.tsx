@@ -1,4 +1,5 @@
 import TambahBarangForm from "./form";
+import { Heading, Text } from "@/components/ui/typography";
 
 import {
   Card,
@@ -12,12 +13,12 @@ export default function TambahBarangPage() {
   return (
     <div className="space-y-6 px-4 py-6 lg:px-6">
       <div data-motion="rise">
-        <h1 className="text-2xl font-bold tracking-tight">
+        <Heading as="h1" size="page">
           Tambah Barang
-        </h1>
-        <p className="text-muted-foreground">
+        </Heading>
+          <Text tone="muted">
           Tambahkan barang baru ke sistem inventaris.
-        </p>
+        </Text>
       </div>
 
       <Card data-motion="pop" data-motion-delay="80" className="max-w-2xl">

@@ -1,5 +1,6 @@
 
 import { Suspense } from "react";
+import { Heading, Text } from "@/components/ui/typography";
 import Link from "next/link";
 
 import { getAllBarang } from "@/lib/services/barang.service";
@@ -121,12 +122,12 @@ export default function BarangPage() {
     <main className="flex min-w-0 flex-col gap-6 px-4 py-6 lg:px-6">
       <div data-motion="rise" className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">
+          <Heading as="h1" size="page">
             Data Barang
-          </h1>
-          <p className="text-sm text-muted-foreground">
+          </Heading>
+          <Text tone="muted">
             Kelola seluruh inventaris gudang.
-          </p>
+          </Text>
         </div>
 
         <Button asChild>

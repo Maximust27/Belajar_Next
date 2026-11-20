@@ -1,5 +1,6 @@
 
 import { Suspense } from "react";
+import { Heading, Text } from "@/components/ui/typography";
 import Link from "next/link";
 
 import {
@@ -96,12 +97,12 @@ async function DashboardContent() {
       {/* Judul Dashboard */}
       <div data-motion="rise" className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">
+          <Heading as="h1" size="page">
             Dashboard Inventaris
-          </h1>
-          <p className="text-sm text-muted-foreground">
+          </Heading>
+          <Text tone="muted">
             Ringkasan data dan kondisi stok gudang.
-          </p>
+          </Text>
         </div>
 
         <Button asChild>
@@ -130,7 +131,7 @@ async function DashboardContent() {
               </CardHeader>
 
               <CardContent>
-                <div className="text-3xl font-bold tabular-nums">
+                <div className="text-app-stat font-bold tabular-nums">
                   <CountUp value={item.value} />
                 </div>
 

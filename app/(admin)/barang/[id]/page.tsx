@@ -1,5 +1,6 @@
 
 import { Suspense } from "react";
+import { Heading, Text } from "@/components/ui/typography";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -225,12 +226,12 @@ export default function DetailBarangPage({
   return (
     <div className="space-y-6 px-4 py-6 lg:px-6">
       <div data-motion="rise">
-        <h1 className="text-2xl font-bold tracking-tight">
+        <Heading as="h1" size="page">
           Detail Barang
-        </h1>
-        <p className="text-muted-foreground">
+        </Heading>
+          <Text tone="muted">
           Informasi dan aktivitas stok barang.
-        </p>
+        </Text>
       </div>
 
       <Suspense fallback={<p>Memuat detail barang...</p>}>

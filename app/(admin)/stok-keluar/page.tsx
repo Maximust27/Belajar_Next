@@ -1,5 +1,6 @@
 
 import { Suspense } from "react";
+import { Heading, Text } from "@/components/ui/typography";
 
 import { getAllBarang } from "@/lib/services/barang.service";
 import { StokKeluarForm } from "./form";
@@ -47,13 +48,12 @@ export default function StokKeluarPage() {
   return (
     <div className="space-y-6 px-4 py-6 lg:px-6">
       <div data-motion="rise">
-        <h1 className="text-2xl font-bold tracking-tight">
+        <Heading as="h1" size="page">
           Barang Keluar
-        </h1>
-
-        <p className="text-muted-foreground">
+        </Heading>
+          <Text tone="muted">
           Kelola pengeluaran stok barang gudang.
-        </p>
+        </Text>
       </div>
 
       <Suspense

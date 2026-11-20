@@ -27,7 +27,7 @@ export function SiteHeader() {
           orientation="vertical"
           className="mr-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">{title}</h1>
+        <span className="text-app-nav font-semibold tracking-tight">{title}</span>
       </div>
     </header>
   );

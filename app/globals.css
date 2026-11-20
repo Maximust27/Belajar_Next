@@ -10,6 +10,16 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
+  /* Typography utility classes resolve to these central admin tokens. */
+  --text-app-caption: var(--type-caption);
+  --text-app-helper: var(--type-helper);
+  --text-app-body: var(--type-body);
+  --text-app-nav: var(--type-nav);
+  --text-app-card: var(--type-card);
+  --text-app-section: var(--type-section);
+  --text-app-page: var(--type-page);
+  --text-app-brand: var(--type-brand);
+  --text-app-stat: var(--type-stat);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,6 +59,16 @@
 }
 
 :root {
+  /* Change these values to scale typography across Inventra's admin UI. */
+  --type-caption: 0.75rem;  /* 12px */
+  --type-helper: 0.8125rem; /* 13px */
+  --type-body: 0.875rem;    /* 14px */
+  --type-nav: 0.9375rem;    /* 15px */
+  --type-card: 1rem;        /* 16px */
+  --type-section: 1.125rem; /* 18px */
+  --type-page: 1.5rem;      /* 24px */
+  --type-brand: 1.25rem;    /* 20px */
+  --type-stat: 1.875rem;    /* 30px */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -202,4 +222,10 @@ html {
   [data-motion] {
     opacity: 1 !important;
   }
+}
+
+/* Unifies admin typography without altering the landing page display. */
+[data-slot="sidebar-inset"] {
+  font-size: var(--type-body);
+  line-height: 1.5;
 }
