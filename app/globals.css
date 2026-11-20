@@ -159,7 +159,7 @@ html {
   }
 
   [data-slot="card"][data-hover-lift="true"] {
-    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms ease, box-shadow 260ms ease;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms ease;
   }
 
   [data-slot="card"][data-hover-lift="true"]:hover {
@@ -178,4 +178,10 @@ html {
 @keyframes inventra-notice-in {
   from { opacity: 0; transform: translateY(8px) scale(0.99); }
   to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion^="flow-"] {
+    transition: none !important;
+  }
 }

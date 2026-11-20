@@ -12,7 +12,7 @@ export function CountUp({ value }: { value: number }) {
 
   useEffect(() => {
     const node = ref.current;
-    if (!node || reducedMotion || value <= 0) return;
+    if (!node || reducedMotion || value <= 0 || !("IntersectionObserver" in window)) return;
 
     let frame = 0;
     let startTime: number | null = null;
