@@ -1,6 +1,7 @@
 
 import { Suspense } from "react";
 import { Heading, Text } from "@/components/ui/typography";
+import { PageShell, PageHeader } from "@/components/ui/page-shell";
 import Link from "next/link";
 import { ChevronDown, Search, RotateCcw } from "lucide-react";
 
@@ -333,9 +334,9 @@ export default function RiwayatPage({
   searchParams,
 }: Props) {
   return (
-    <div className="flex flex-col gap-6 px-4 py-6 lg:px-6">
+    <PageShell>
       {/* PAGE HEADER */}
-      <div data-motion="rise" className="space-y-1">
+      <PageHeader data-motion="rise" className="flex-col gap-1">
         <Heading as="h1" size="page">
           Riwayat Transaksi
         </Heading>
@@ -343,7 +344,7 @@ export default function RiwayatPage({
           Monitoring seluruh aktivitas barang masuk
           dan keluar di gudang.
         </Text>
-      </div>
+      </PageHeader>
 
       {/* PAGE CONTENT */}
       <Suspense
@@ -360,6 +361,6 @@ export default function RiwayatPage({
       >
         <RiwayatContent searchParams={searchParams} />
       </Suspense>
-    </div>
+    </PageShell>
   );
 }

@@ -1,6 +1,7 @@
 
 import { Suspense } from "react";
 import { Heading, Text } from "@/components/ui/typography";
+import { PageShell, PageHeader } from "@/components/ui/page-shell";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -61,7 +62,7 @@ async function DetailContent({ params }: Props) {
         : "Aman";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-app-section">
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Button variant="outline" asChild>
@@ -79,7 +80,7 @@ async function DetailContent({ params }: Props) {
         </Button>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid gap-app-grid lg:grid-cols-3">
         <Card data-motion="rise" className="lg:col-span-2">
           <CardHeader>
             <CardTitle>Informasi Barang</CardTitle>
@@ -224,19 +225,19 @@ export default function DetailBarangPage({
   params,
 }: Props) {
   return (
-    <div className="space-y-6 px-4 py-6 lg:px-6">
-      <div data-motion="rise">
+    <PageShell>
+      <PageHeader data-motion="rise" className="flex-col gap-1">
         <Heading as="h1" size="page">
           Detail Barang
         </Heading>
           <Text tone="muted">
           Informasi dan aktivitas stok barang.
         </Text>
-      </div>
+      </PageHeader>
 
       <Suspense fallback={<p>Memuat detail barang...</p>}>
         <DetailContent params={params} />
       </Suspense>
-    </div>
+    </PageShell>
   );
 }

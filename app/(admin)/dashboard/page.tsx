@@ -1,6 +1,7 @@
 
 import { Suspense } from "react";
 import { Heading, Text } from "@/components/ui/typography";
+import { PageShell, PageHeader } from "@/components/ui/page-shell";
 import Link from "next/link";
 
 import {
@@ -92,10 +93,10 @@ async function DashboardContent() {
   ];
 
   return (
-    <div className="flex flex-col gap-6 px-4 py-6 lg:px-6">
+    <PageShell>
 
       {/* Judul Dashboard */}
-      <div data-motion="rise" className="flex flex-wrap items-center justify-between gap-4">
+      <PageHeader data-motion="rise">
         <div>
           <Heading as="h1" size="page">
             Dashboard Inventaris
@@ -111,10 +112,10 @@ async function DashboardContent() {
             Tambah Barang
           </Link>
         </Button>
-      </div>
+      </PageHeader>
 
       {/* Statistik */}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-app-grid sm:grid-cols-2 xl:grid-cols-4">
         {cards.map((item, index) => {
           const Icon = item.icon;
 
@@ -145,7 +146,7 @@ async function DashboardContent() {
       </div>
 
       {/* Grafik dan Akses Cepat */}
-      <div className="grid gap-4 xl:grid-cols-3">
+      <div className="grid gap-app-grid xl:grid-cols-3">
 
         <Card data-motion="rise" data-motion-delay="120" data-hover-lift="true" className="xl:col-span-2">
           <CardHeader>
@@ -290,7 +291,7 @@ async function DashboardContent() {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </PageShell>
   );
 }
 
@@ -299,7 +300,7 @@ export default function DashboardPage() {
   return (
     <Suspense
       fallback={
-        <div className="grid gap-4 px-4 py-6 sm:grid-cols-2 xl:grid-cols-4 lg:px-6">
+        <div className="grid gap-app-grid px-app-page py-app-page-y sm:grid-cols-2 xl:grid-cols-4">
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}

@@ -1,6 +1,7 @@
 
 import { Suspense } from "react";
 import { Heading, Text } from "@/components/ui/typography";
+import { PageShell, PageHeader } from "@/components/ui/page-shell";
 
 import { getAllBarang } from "@/lib/services/barang.service";
 import { StokKeluarForm } from "./form";
@@ -27,7 +28,7 @@ async function FormContent() {
   }));
 
   return (
-    <Card data-motion="pop" data-motion-delay="80" className="max-w-2xl">
+    <Card data-motion="pop" data-motion-delay="80" className="w-full max-w-(--ds-form-max-width)">
       <CardHeader>
         <CardTitle>Form Pengeluaran Barang</CardTitle>
 
@@ -46,15 +47,15 @@ async function FormContent() {
 
 export default function StokKeluarPage() {
   return (
-    <div className="space-y-6 px-4 py-6 lg:px-6">
-      <div data-motion="rise">
+    <PageShell>
+      <PageHeader data-motion="rise" className="flex-col gap-1">
         <Heading as="h1" size="page">
           Barang Keluar
         </Heading>
           <Text tone="muted">
           Kelola pengeluaran stok barang gudang.
         </Text>
-      </div>
+      </PageHeader>
 
       <Suspense
         fallback={
@@ -63,6 +64,6 @@ export default function StokKeluarPage() {
       >
         <FormContent />
       </Suspense>
-    </div>
+    </PageShell>
   );
 }

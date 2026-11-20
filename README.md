@@ -74,3 +74,17 @@ import { Heading, Text, Caption } from "@/components/ui/typography";
 ```
 
 Semua class `text-app-*` membaca token yang sama. Landing page mempertahankan tipografi display editorialnya sendiri.
+
+## Inventra UI design system
+
+Fondasi desain dashboard Inventra berada di:
+- `app/design-tokens.css` — **single source of truth** untuk spacing, ukuran kontrol, lebar form, radius, sidebar, shadow, warna semantik, fokus keyboard, dan micro-motion.
+- `app/globals.css` — mapping Tailwind CSS v4 `@theme inline` ke class `gap-app-grid`, `px-app-page`, `rounded-app-card`, `h-app-control`, `shadow-app-card`, dll.
+- `components/ui/page-shell.tsx` — komponen `PageShell` dan `PageHeader` untuk konsistensi layout delapan halaman admin.
+- `components/ui/card.tsx`, `button.tsx`, `input.tsx`, `select.tsx`, `table.tsx`, `sidebar.tsx` — ukuran mengikuti token, bukan angka berulang.
+
+**Prinsip visual:** spacing 4/8px, hirarki radius (kontrol 10px, card 14px, panel 18px), permukaan netral dengan elevasi halus, dan layout responsif. Ukuran standar: tombol/input/select 40px (minimum 44px pada perangkat sentuh), baris tabel 44px, padding card 20px, grid gap 16px, page gap 24px, lebar form maksimal 672px. Teks tetap dikendalikan melalui `--type-*` dan komponen `Heading`/`Text`.
+
+**Cara mengganti global:** ubah token `--ds-card-padding`, `--ds-radius-card`, `--ds-section-gap`, `--ds-control-height`, dan sebagainya di `app/design-tokens.css`; seluruh komponen yang memakai token tersebut akan mengikuti. Landing page sengaja mempertahankan tata visual editorialnya.
+
+Referensi prinsip: [Carbon Spacing](https://carbondesignsystem.com/building-blocks/foundations/spacing/overview), [Atlassian Design Tokens](https://atlassian.design/foundations/tokens/design-tokens), dan [WCAG 2.2 Target Size](https://www.w3.org/TR/WCAG22/#target-size-minimum). Penerapan token membantu konsistensi; kepatuhan WCAG tetap perlu diuji secara manual dan otomatis.

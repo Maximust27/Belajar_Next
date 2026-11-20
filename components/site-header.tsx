@@ -21,7 +21,7 @@ export function SiteHeader() {
 
   return (
     <header data-motion="fade" className="flex h-(--header-height) shrink-0 items-center gap-2 border-b">
-      <div className="flex w-full items-center gap-2 px-4">
+      <div className="flex w-full items-center gap-2 px-app-page">
         <SidebarTrigger className="-ml-1" />
         <Separator
           orientation="vertical"

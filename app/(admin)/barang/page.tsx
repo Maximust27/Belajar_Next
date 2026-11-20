@@ -1,6 +1,7 @@
 
 import { Suspense } from "react";
 import { Heading, Text } from "@/components/ui/typography";
+import { PageShell, PageHeader } from "@/components/ui/page-shell";
 import Link from "next/link";
 
 import { getAllBarang } from "@/lib/services/barang.service";
@@ -119,8 +120,8 @@ async function TabelBarang() {
 // Halaman mengikuti lebar area utama, konsisten dengan dashboard.
 export default function BarangPage() {
   return (
-    <main className="flex min-w-0 flex-col gap-6 px-4 py-6 lg:px-6">
-      <div data-motion="rise" className="flex flex-wrap items-center justify-between gap-4">
+    <PageShell>
+      <PageHeader data-motion="rise">
         <div>
           <Heading as="h1" size="page">
             Data Barang
@@ -136,7 +137,7 @@ export default function BarangPage() {
             Tambah Barang
           </Link>
         </Button>
-      </div>
+      </PageHeader>
 
       <Suspense
         fallback={
@@ -149,6 +150,6 @@ export default function BarangPage() {
       >
         <TabelBarang />
       </Suspense>
-    </main>
+    </PageShell>
   );
 }

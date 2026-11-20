@@ -28,7 +28,7 @@ export default function EditBarangForm({
   );
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} className="space-y-app-form">
       <input
         type="hidden"
         name="id"
@@ -38,13 +38,13 @@ export default function EditBarangForm({
       {state.error && (
         <div
           role="alert"
-          className="rounded-lg bg-red-50 p-3 text-sm text-red-700"
+          className="rounded-app-control bg-red-50 p-3 text-sm text-red-700"
         >
           {state.error}
         </div>
       )}
 
-      <div className="space-y-2">
+      <div className="space-y-app-inline">
         <Label htmlFor="sku">Kode Barang / SKU</Label>
         <Input
           id="sku"
@@ -55,7 +55,7 @@ export default function EditBarangForm({
         />
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-app-inline">
         <Label htmlFor="nama">Nama Barang</Label>
         <Input
           id="nama"
@@ -66,7 +66,7 @@ export default function EditBarangForm({
         />
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-app-inline">
         <Label htmlFor="satuan">Satuan</Label>
         <Input
           id="satuan"
@@ -81,7 +81,7 @@ export default function EditBarangForm({
         </p>
       </div>
 
-      <div className="rounded-lg border bg-muted/40 p-4">
+      <div className="rounded-app-control border bg-muted/40 p-4">
         <p className="text-sm font-medium">
           Informasi Stok
         </p>

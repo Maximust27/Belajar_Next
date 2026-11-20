@@ -43,13 +43,13 @@ export function StokKeluarForm({
   );
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form action={formAction} className="space-y-app-form">
 
       {/* Notifikasi */}
       {state.error && (
         <div
           role="alert"
-          className="flex gap-3 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700"
+          className="flex gap-3 rounded-app-control border border-red-200 bg-red-50 p-4 text-sm text-red-700"
         >
           <AlertTriangle className="size-5 shrink-0" />
           <span>{state.error}</span>
@@ -59,14 +59,14 @@ export function StokKeluarForm({
       {state.success && (
         <div
           role="status"
-          className="rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700"
+          className="rounded-app-control border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700"
         >
           {state.success}
         </div>
       )}
 
       {/* Pilih barang */}
-      <div className="space-y-2">
+      <div className="space-y-app-inline">
         <Label>Pilih Barang</Label>
 
         <Select
@@ -97,7 +97,7 @@ export function StokKeluarForm({
 
       {/* Informasi stok tersedia */}
       {selectedBarang && (
-        <div data-motion="pop" className="flex items-center justify-between rounded-xl border bg-muted/40 p-4">
+        <div data-motion="pop" className="flex items-center justify-between rounded-app-card border bg-muted/40 p-4">
           <div className="space-y-1">
             <p className="text-sm text-muted-foreground">
               Stok Tersedia
@@ -112,7 +112,7 @@ export function StokKeluarForm({
       )}
 
       {/* Jumlah barang keluar */}
-      <div className="space-y-2">
+      <div className="space-y-app-inline">
         <Label htmlFor="jumlah">Jumlah Keluar</Label>
 
         <Input
@@ -133,7 +133,7 @@ export function StokKeluarForm({
       </div>
 
       {/* Keterangan */}
-      <div className="space-y-2">
+      <div className="space-y-app-inline">
         <Label htmlFor="keterangan">Keterangan</Label>
 
         <Input
