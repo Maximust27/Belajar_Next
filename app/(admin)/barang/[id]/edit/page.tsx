@@ -37,7 +37,7 @@ async function EditContent({ params }: Props) {
   }
 
   return (
-    <Card className="max-w-2xl">
+    <Card data-motion="pop" data-motion-delay="80" className="max-w-2xl">
       <CardHeader>
         <CardTitle>Edit Informasi Barang</CardTitle>
         <CardDescription>
@@ -64,7 +64,7 @@ export default function EditBarangPage({
 }: Props) {
   return (
     <div className="space-y-6 px-4 py-6 lg:px-6">
-      <div>
+      <div data-motion="rise">
         <h1 className="text-2xl font-bold tracking-tight">
           Edit Barang
         </h1>

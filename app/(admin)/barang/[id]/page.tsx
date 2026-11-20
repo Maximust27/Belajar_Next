@@ -79,7 +79,7 @@ async function DetailContent({ params }: Props) {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
+        <Card data-motion="rise" className="lg:col-span-2">
           <CardHeader>
             <CardTitle>Informasi Barang</CardTitle>
             <CardDescription>
@@ -115,7 +115,7 @@ async function DetailContent({ params }: Props) {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card data-motion="pop" data-motion-delay="120">
           <CardHeader>
             <CardTitle>Stok Tersedia</CardTitle>
           </CardHeader>
@@ -143,7 +143,7 @@ async function DetailContent({ params }: Props) {
         </Card>
       </div>
 
-      <Card>
+      <Card data-motion="rise" data-motion-delay="180">
         <CardHeader>
           <CardTitle>Riwayat Stok Barang</CardTitle>
           <CardDescription>
@@ -224,7 +224,7 @@ export default function DetailBarangPage({
 }: Props) {
   return (
     <div className="space-y-6 px-4 py-6 lg:px-6">
-      <div>
+      <div data-motion="rise">
         <h1 className="text-2xl font-bold tracking-tight">
           Detail Barang
         </h1>

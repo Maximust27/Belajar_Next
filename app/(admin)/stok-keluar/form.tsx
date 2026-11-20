@@ -97,7 +97,7 @@ export function StokKeluarForm({
 
       {/* Informasi stok tersedia */}
       {selectedBarang && (
-        <div className="flex items-center justify-between rounded-xl border bg-muted/40 p-4">
+        <div data-motion="pop" className="flex items-center justify-between rounded-xl border bg-muted/40 p-4">
           <div className="space-y-1">
             <p className="text-sm text-muted-foreground">
               Stok Tersedia

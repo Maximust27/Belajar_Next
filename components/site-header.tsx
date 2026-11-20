@@ -20,7 +20,7 @@ export function SiteHeader() {
   const title = route ? routeTitles[route] : "Inventaris Gudang";
 
   return (
-    <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b">
+    <header data-motion="fade" className="flex h-(--header-height) shrink-0 items-center gap-2 border-b">
       <div className="flex w-full items-center gap-2 px-4">
         <SidebarTrigger className="-ml-1" />
         <Separator

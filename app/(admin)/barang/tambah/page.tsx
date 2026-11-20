@@ -11,7 +11,7 @@ import {
 export default function TambahBarangPage() {
   return (
     <div className="space-y-6 px-4 py-6 lg:px-6">
-      <div>
+      <div data-motion="rise">
         <h1 className="text-2xl font-bold tracking-tight">
           Tambah Barang
         </h1>
@@ -20,7 +20,7 @@ export default function TambahBarangPage() {
         </p>
       </div>
 
-      <Card className="max-w-2xl">
+      <Card data-motion="pop" data-motion-delay="80" className="max-w-2xl">
         <CardHeader>
           <CardTitle>Informasi Barang</CardTitle>
           <CardDescription>

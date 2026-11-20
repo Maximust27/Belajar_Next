@@ -24,7 +24,7 @@ async function FormContent() {
   }));
 
   return (
-    <Card className="max-w-2xl">
+    <Card data-motion="pop" data-motion-delay="80" className="max-w-2xl">
       <CardHeader>
         <CardTitle>Form Penerimaan Barang</CardTitle>
         <CardDescription>
@@ -42,7 +42,7 @@ async function FormContent() {
 export default function StokMasukPage() {
   return (
     <div className="space-y-6 px-4 py-6 lg:px-6">
-      <div>
+      <div data-motion="rise">
         <h1 className="text-2xl font-bold tracking-tight">
           Barang Masuk
         </h1>

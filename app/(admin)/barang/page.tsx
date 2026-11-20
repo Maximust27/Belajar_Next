@@ -30,7 +30,7 @@ async function TabelBarang() {
   const barang = await getAllBarang();
 
   return (
-    <Card>
+    <Card data-motion="rise">
       <CardHeader>
         <CardTitle>Daftar Barang ({barang.length})</CardTitle>
       </CardHeader>
@@ -62,7 +62,7 @@ async function TabelBarang() {
               </TableRow>
             ) : (
               barang.map((item) => (
-                <TableRow key={item.id}>
+                <TableRow key={item.id} className="transition-colors duration-200 hover:bg-muted/50">
                   <TableCell className="font-mono text-xs">
                     {item.sku}
                   </TableCell>
@@ -128,7 +128,7 @@ export default function BarangPage() {
           </Link>
         </Button>
 
-        <div className="flex flex-wrap items-center justify-between gap-4">
+        <div data-motion="rise" className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="rounded-xl bg-primary/10 p-3">
               <Package className="size-6 text-primary" />

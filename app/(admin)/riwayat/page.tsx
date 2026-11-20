@@ -73,7 +73,7 @@ async function RiwayatContent({ searchParams }: Props) {
   });
 
   return (
-    <Card className="overflow-hidden">
+    <Card data-motion="rise" className="overflow-hidden">
       {/* HEADER CARD */}
       <CardHeader>
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -247,7 +247,7 @@ async function RiwayatContent({ searchParams }: Props) {
                 riwayat.map((item) => (
                   <TableRow
                     key={item.id}
-                    className="hover:bg-muted/40"
+                    className="transition-colors duration-200 hover:bg-muted/40"
                   >
                     {/* TANGGAL */}
                     <TableCell className="whitespace-nowrap text-sm">
@@ -334,7 +334,7 @@ export default function RiwayatPage({
   return (
     <div className="flex flex-col gap-6 px-4 py-6 lg:px-6">
       {/* PAGE HEADER */}
-      <div className="space-y-1">
+      <div data-motion="rise" className="space-y-1">
         <h1 className="text-2xl font-bold tracking-tight">
           Riwayat Transaksi
         </h1>

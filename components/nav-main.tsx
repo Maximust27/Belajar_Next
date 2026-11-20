@@ -24,8 +24,8 @@ export function NavMain({ items }: { items: NavItem[] }) {
     <SidebarGroup>
       <SidebarGroupContent>
         <SidebarMenu>
-          {items.map(({ title, url, icon: Icon }) => (
-            <SidebarMenuItem key={url}>
+          {items.map(({ title, url, icon: Icon }, index) => (
+            <SidebarMenuItem key={url} data-motion="left" data-motion-delay={index * 55}>
               <SidebarMenuButton
                 asChild
                 tooltip={title}

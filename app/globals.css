@@ -128,3 +128,54 @@
     @apply font-sans;
   }
 }
+
+/* Motion system: smooth anchors and subtle interactive feedback. */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 8.5rem;
+}
+
+@media (min-width: 768px) {
+  html { scroll-padding-top: 5.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  [data-slot="button"]:not(:disabled):not([aria-disabled="true"]) {
+    transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms ease, background-color 180ms ease;
+  }
+
+  [data-slot="button"]:not(:disabled):not([aria-disabled="true"]):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px -12px currentColor;
+  }
+
+  [data-slot="button"]:not(:disabled):not([aria-disabled="true"]):active {
+    transform: translateY(1px) scale(0.985);
+    box-shadow: none;
+  }
+
+  [data-slot="card"][data-hover-lift="true"] {
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms ease, box-shadow 260ms ease;
+  }
+
+  [data-slot="card"][data-hover-lift="true"]:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 34px -25px rgba(0, 0, 0, 0.28);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [role="status"],
+  [role="alert"] {
+    animation: inventra-notice-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes inventra-notice-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}

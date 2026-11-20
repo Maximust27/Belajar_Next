@@ -13,6 +13,7 @@ import {
 
 import { getDashboardData } from "@/lib/services/dashboard.service";
 import { ChartStatusBarang } from "@/components/dashboard/chart-status-barang";
+import { CountUp } from "@/components/dashboard/count-up";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -93,7 +94,7 @@ async function DashboardContent() {
     <div className="flex flex-col gap-6 px-4 py-6 lg:px-6">
 
       {/* Judul Dashboard */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div data-motion="rise" className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">
             Dashboard Inventaris
@@ -113,11 +114,11 @@ async function DashboardContent() {
 
       {/* Statistik */}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {cards.map((item) => {
+        {cards.map((item, index) => {
           const Icon = item.icon;
 
           return (
-            <Card key={item.title}>
+            <Card key={item.title} data-motion="pop" data-motion-delay={index * 100} data-hover-lift="true">
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                   {item.title}
@@ -130,7 +131,7 @@ async function DashboardContent() {
 
               <CardContent>
                 <div className="text-3xl font-bold tabular-nums">
-                  {item.value.toLocaleString("id-ID")}
+                  <CountUp value={item.value} />
                 </div>
 
                 <p className="mt-2 text-xs text-muted-foreground">
@@ -145,7 +146,7 @@ async function DashboardContent() {
       {/* Grafik dan Akses Cepat */}
       <div className="grid gap-4 xl:grid-cols-3">
 
-        <Card className="xl:col-span-2">
+        <Card data-motion="rise" data-motion-delay="120" data-hover-lift="true" className="xl:col-span-2">
           <CardHeader>
             <CardTitle>Distribusi Status Stok</CardTitle>
             <CardDescription>
@@ -164,7 +165,7 @@ async function DashboardContent() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card data-motion="rise" data-motion-delay="210" data-hover-lift="true">
           <CardHeader>
             <CardTitle>Akses Cepat</CardTitle>
             <CardDescription>
@@ -204,7 +205,7 @@ async function DashboardContent() {
       </div>
 
       {/* Tabel Barang Terbaru */}
-      <Card>
+      <Card data-motion="rise">
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
             <CardTitle>Barang Terbaru</CardTitle>
@@ -243,7 +244,7 @@ async function DashboardContent() {
                   </TableRow>
                 ) : (
                   barangTerbaru.map((item) => (
-                    <TableRow key={item.id}>
+                    <TableRow key={item.id} className="transition-colors duration-200 hover:bg-muted/50">
                       <TableCell className="font-mono text-xs">
                         {item.sku}
                       </TableCell>

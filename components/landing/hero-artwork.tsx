@@ -1,6 +1,6 @@
 export function HeroArtwork() {
   return (
-    <div className="relative mx-auto w-full max-w-[570px]" aria-hidden="true">
+    <div data-motion="artwork" data-motion-delay="185" className="relative mx-auto w-full max-w-[570px]" aria-hidden="true">
       <svg
         viewBox="0 0 560 460"
         fill="none"
