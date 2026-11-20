@@ -1,5 +1,7 @@
 
 import { Suspense } from "react";
+import { Heading, Text } from "@/components/ui/typography";
+import { PageShell, PageHeader } from "@/components/ui/page-shell";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -60,7 +62,7 @@ async function DetailContent({ params }: Props) {
         : "Aman";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-app-section">
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Button variant="outline" asChild>
@@ -78,8 +80,8 @@ async function DetailContent({ params }: Props) {
         </Button>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
+      <div className="grid gap-app-grid lg:grid-cols-3">
+        <Card data-motion="rise" className="lg:col-span-2">
           <CardHeader>
             <CardTitle>Informasi Barang</CardTitle>
             <CardDescription>
@@ -115,7 +117,7 @@ async function DetailContent({ params }: Props) {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card data-motion="pop" data-motion-delay="120">
           <CardHeader>
             <CardTitle>Stok Tersedia</CardTitle>
           </CardHeader>
@@ -143,7 +145,7 @@ async function DetailContent({ params }: Props) {
         </Card>
       </div>
 
-      <Card>
+      <Card data-motion="rise" data-motion-delay="180">
         <CardHeader>
           <CardTitle>Riwayat Stok Barang</CardTitle>
           <CardDescription>
@@ -223,19 +225,19 @@ export default function DetailBarangPage({
   params,
 }: Props) {
   return (
-    <div className="space-y-6 px-4 py-6 lg:px-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">
+    <PageShell>
+      <PageHeader data-motion="rise" className="flex-col gap-1">
+        <Heading as="h1" size="page">
           Detail Barang
-        </h1>
-        <p className="text-muted-foreground">
+        </Heading>
+          <Text tone="muted">
           Informasi dan aktivitas stok barang.
-        </p>
-      </div>
+        </Text>
+      </PageHeader>
 
       <Suspense fallback={<p>Memuat detail barang...</p>}>
         <DetailContent params={params} />
       </Suspense>
-    </div>
+    </PageShell>
   );
 }

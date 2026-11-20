@@ -20,14 +20,14 @@ export function SiteHeader() {
   const title = route ? routeTitles[route] : "Inventaris Gudang";
 
   return (
-    <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b">
-      <div className="flex w-full items-center gap-2 px-4">
+    <header data-motion="fade" className="flex h-(--header-height) shrink-0 items-center gap-2 border-b">
+      <div className="flex w-full items-center gap-2 px-app-page">
         <SidebarTrigger className="-ml-1" />
         <Separator
           orientation="vertical"
           className="mr-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">{title}</h1>
+        <span className="text-app-nav font-semibold tracking-tight">{title}</span>
       </div>
     </header>
   );

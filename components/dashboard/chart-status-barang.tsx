@@ -9,6 +9,8 @@ import {
   YAxis,
 } from "recharts";
 
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
+
 import {
   ChartContainer,
   ChartTooltip,
@@ -33,6 +35,8 @@ export function ChartStatusBarang({
 }: {
   data: ChartData[];
 }) {
+  const reducedMotion = useReducedMotion();
+
   return (
     <ChartContainer
       config={chartConfig}
@@ -66,6 +70,9 @@ export function ChartStatusBarang({
           dataKey="jumlah"
           fill="var(--color-jumlah)"
           radius={[6, 6, 0, 0]}
+          isAnimationActive={!reducedMotion}
+          animationDuration={1050}
+          animationEasing="ease-out"
         />
       </BarChart>
     </ChartContainer>

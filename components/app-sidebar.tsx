@@ -34,13 +34,13 @@ const navigation = [
 export function AppSidebar(props: ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
-      <SidebarHeader>
+      <SidebarHeader className="px-3 pb-2 pt-4">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild size="lg">
+            <SidebarMenuButton asChild size="lg" className="px-3 [&_svg]:size-5!">
               <Link href="/dashboard" aria-label="Inventra Dashboard">
                 <Boxes className="size-5" aria-hidden="true" />
-                <span className="text-base font-semibold">Inventra</span>
+                <span className="text-app-brand font-semibold tracking-tight">Inventra</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -53,7 +53,7 @@ export function AppSidebar(props: ComponentProps<typeof Sidebar>) {
         </Suspense>
       </SidebarContent>
 
-      <SidebarFooter>
+      <SidebarFooter className="px-3 pb-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Beranda">

@@ -36,20 +36,20 @@ export function StokMasukForm({
   );
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} className="space-y-app-form">
       {state.error && (
-        <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">
+        <p role="alert" className="rounded-app-control bg-red-50 p-3 text-sm text-red-700">
           {state.error}
         </p>
       )}
 
       {state.success && (
-        <p role="status" className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-700">
+        <p role="status" className="rounded-app-control bg-emerald-50 p-3 text-sm text-emerald-700">
           {state.success}
         </p>
       )}
 
-      <div className="space-y-2">
+      <div className="space-y-app-inline">
         <Label>Pilih Barang</Label>
 
         <Select name="barangId" required>
@@ -71,7 +71,7 @@ export function StokMasukForm({
         </Select>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-app-inline">
         <Label htmlFor="jumlah">Jumlah Masuk</Label>
         <Input
           id="jumlah"
@@ -84,7 +84,7 @@ export function StokMasukForm({
         />
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-app-inline">
         <Label htmlFor="keterangan">Keterangan</Label>
         <Input
           id="keterangan"

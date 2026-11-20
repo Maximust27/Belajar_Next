@@ -1,5 +1,7 @@
 
 import { Suspense } from "react";
+import { Heading, Text } from "@/components/ui/typography";
+import { PageShell, PageHeader } from "@/components/ui/page-shell";
 import Link from "next/link";
 
 import {
@@ -13,6 +15,7 @@ import {
 
 import { getDashboardData } from "@/lib/services/dashboard.service";
 import { ChartStatusBarang } from "@/components/dashboard/chart-status-barang";
+import { CountUp } from "@/components/dashboard/count-up";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -90,17 +93,17 @@ async function DashboardContent() {
   ];
 
   return (
-    <div className="flex flex-col gap-6 px-4 py-6 lg:px-6">
+    <PageShell>
 
       {/* Judul Dashboard */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <PageHeader data-motion="rise">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">
+          <Heading as="h1" size="page">
             Dashboard Inventaris
-          </h1>
-          <p className="text-sm text-muted-foreground">
+          </Heading>
+          <Text tone="muted">
             Ringkasan data dan kondisi stok gudang.
-          </p>
+          </Text>
         </div>
 
         <Button asChild>
@@ -109,15 +112,15 @@ async function DashboardContent() {
             Tambah Barang
           </Link>
         </Button>
-      </div>
+      </PageHeader>
 
       {/* Statistik */}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {cards.map((item) => {
+      <div className="grid gap-app-grid sm:grid-cols-2 xl:grid-cols-4">
+        {cards.map((item, index) => {
           const Icon = item.icon;
 
           return (
-            <Card key={item.title}>
+            <Card key={item.title} data-motion="pop" data-motion-delay={index * 100} data-hover-lift="true">
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                   {item.title}
@@ -129,8 +132,8 @@ async function DashboardContent() {
               </CardHeader>
 
               <CardContent>
-                <div className="text-3xl font-bold tabular-nums">
-                  {item.value.toLocaleString("id-ID")}
+                <div className="text-app-stat font-bold tabular-nums">
+                  <CountUp value={item.value} />
                 </div>
 
                 <p className="mt-2 text-xs text-muted-foreground">
@@ -143,9 +146,9 @@ async function DashboardContent() {
       </div>
 
       {/* Grafik dan Akses Cepat */}
-      <div className="grid gap-4 xl:grid-cols-3">
+      <div className="grid gap-app-grid xl:grid-cols-3">
 
-        <Card className="xl:col-span-2">
+        <Card data-motion="rise" data-motion-delay="120" data-hover-lift="true" className="xl:col-span-2">
           <CardHeader>
             <CardTitle>Distribusi Status Stok</CardTitle>
             <CardDescription>
@@ -164,7 +167,7 @@ async function DashboardContent() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card data-motion="rise" data-motion-delay="210" data-hover-lift="true">
           <CardHeader>
             <CardTitle>Akses Cepat</CardTitle>
             <CardDescription>
@@ -204,7 +207,7 @@ async function DashboardContent() {
       </div>
 
       {/* Tabel Barang Terbaru */}
-      <Card>
+      <Card data-motion="rise">
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
             <CardTitle>Barang Terbaru</CardTitle>
@@ -243,7 +246,7 @@ async function DashboardContent() {
                   </TableRow>
                 ) : (
                   barangTerbaru.map((item) => (
-                    <TableRow key={item.id}>
+                    <TableRow key={item.id} className="transition-colors duration-200 hover:bg-muted/50">
                       <TableCell className="font-mono text-xs">
                         {item.sku}
                       </TableCell>
@@ -288,7 +291,7 @@ async function DashboardContent() {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </PageShell>
   );
 }
 
@@ -297,7 +300,7 @@ export default function DashboardPage() {
   return (
     <Suspense
       fallback={
-        <div className="grid gap-4 px-4 py-6 sm:grid-cols-2 xl:grid-cols-4 lg:px-6">
+        <div className="grid gap-app-grid px-app-page py-app-page-y sm:grid-cols-2 xl:grid-cols-4">
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}

@@ -6,6 +6,7 @@ import type { LucideIcon } from "lucide-react";
 import {
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -21,14 +22,16 @@ export function NavMain({ items }: { items: NavItem[] }) {
   const pathname = usePathname();
 
   return (
-    <SidebarGroup>
+    <SidebarGroup className="px-2 py-2">
+      <SidebarGroupLabel className="px-3 font-semibold uppercase tracking-[0.13em] text-sidebar-foreground/55">Menu utama</SidebarGroupLabel>
       <SidebarGroupContent>
-        <SidebarMenu>
-          {items.map(({ title, url, icon: Icon }) => (
-            <SidebarMenuItem key={url}>
+        <SidebarMenu className="gap-1">
+          {items.map(({ title, url, icon: Icon }, index) => (
+            <SidebarMenuItem key={url} data-motion="left" data-motion-delay={index * 55}>
               <SidebarMenuButton
                 asChild
                 tooltip={title}
+                className="font-medium transition-colors duration-200 data-[active=true]:font-semibold"
                 isActive={pathname === url || pathname.startsWith(`${url}/`)}
               >
                 <Link href={url}>

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./shadcn-utilities.css";
+@import "./design-tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -10,6 +11,42 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
+  /* Typography utility classes resolve to these central admin tokens. */
+  --text-app-caption: var(--type-caption);
+  --text-app-helper: var(--type-helper);
+  --text-app-body: var(--type-body);
+  --text-app-nav: var(--type-nav);
+  --text-app-card: var(--type-card);
+  --text-app-section: var(--type-section);
+  --text-app-page: var(--type-page);
+  --text-app-brand: var(--type-brand);
+  --text-app-stat: var(--type-stat);
+
+  /* Tailwind utilities for semantic design tokens. */
+  --spacing-app-page: var(--ds-page-gutter);
+  --spacing-app-page-y: var(--ds-page-padding-y);
+  --spacing-app-section: var(--ds-section-gap);
+  --spacing-app-grid: var(--ds-grid-gap);
+  --spacing-app-form: var(--ds-form-gap);
+  --spacing-app-inline: var(--ds-inline-gap);
+  --spacing-app-control: var(--ds-control-height);
+  --spacing-app-control-sm: var(--ds-control-height-sm);
+  --spacing-app-control-lg: var(--ds-control-height-lg);
+  --spacing-app-control-x: var(--ds-control-padding-x);
+  --spacing-app-control-x-sm: var(--ds-control-padding-x-sm);
+  --spacing-app-control-x-lg: var(--ds-control-padding-x-lg);
+  --spacing-app-row: var(--ds-table-row-height);
+  --radius-app-small: var(--ds-radius-small);
+  --radius-app-control: var(--ds-radius-control);
+  --radius-app-card: var(--ds-radius-card);
+  --radius-app-panel: var(--ds-radius-panel);
+  --radius-app-pill: var(--ds-radius-badge);
+  --shadow-app-card: var(--ds-shadow-card);
+  --shadow-app-hover: var(--ds-shadow-card-hover);
+  --shadow-app-overlay: var(--ds-shadow-overlay);
+  --color-app-surface: var(--ds-color-surface);
+  --color-app-surface-muted: var(--ds-color-surface-muted);
+  --color-app-outline: var(--ds-color-outline);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,6 +86,16 @@
 }
 
 :root {
+  /* Change these values to scale typography across Inventra's admin UI. */
+  --type-caption: 0.75rem;  /* 12px */
+  --type-helper: 0.8125rem; /* 13px */
+  --type-body: 0.875rem;    /* 14px */
+  --type-nav: 0.9375rem;    /* 15px */
+  --type-card: 1rem;        /* 16px */
+  --type-section: 1.125rem; /* 18px */
+  --type-page: 1.5rem;      /* 24px */
+  --type-brand: 1.25rem;    /* 20px */
+  --type-stat: 1.875rem;    /* 30px */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -127,4 +174,85 @@
   html {
     @apply font-sans;
   }
+}
+
+/* Motion system: smooth anchors and subtle interactive feedback. */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 8.5rem;
+}
+
+@media (min-width: 768px) {
+  html { scroll-padding-top: 5.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  [data-slot="button"]:not(:disabled):not([aria-disabled="true"]) {
+    transition: transform var(--ds-motion-fast) var(--ds-motion-ease), box-shadow var(--ds-motion-fast) ease, background-color var(--ds-motion-fast) ease;
+  }
+
+  [data-slot="button"]:not(:disabled):not([aria-disabled="true"]):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px -12px currentColor;
+  }
+
+  [data-slot="button"]:not(:disabled):not([aria-disabled="true"]):active {
+    transform: translateY(1px) scale(0.985);
+    box-shadow: none;
+  }
+
+  [data-slot="card"][data-hover-lift="true"] {
+    transition: transform var(--ds-motion-base) var(--ds-motion-ease), box-shadow var(--ds-motion-base) ease;
+  }
+
+  [data-slot="card"][data-hover-lift="true"]:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ds-shadow-card-hover);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [role="status"],
+  [role="alert"] {
+    animation: inventra-notice-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes inventra-notice-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion^="flow-"] {
+    transition: none !important;
+  }
+}
+
+/*
+ * Anti-flash scroll reveal:
+ * - Elements are hidden by CSS before hydration, so no visible -> invisible blink.
+ * - Web Animations API reveals each once; JS sets data-motion-state="shown".
+ * - No-JS, unsupported browsers and reduced-motion users keep visible content.
+ */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  :root:not([data-motion-disabled="true"]) [data-motion]:not([data-motion-state="shown"]) {
+    opacity: 0;
+  }
+}
+
+@media print {
+  [data-motion] {
+    opacity: 1 !important;
+  }
+}
+
+/* Unifies admin typography without altering the landing page display. */
+[data-slot="sidebar-inset"] {
+  font-size: var(--type-body);
+  line-height: 1.5;
 }

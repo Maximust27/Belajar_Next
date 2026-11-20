@@ -1,5 +1,7 @@
 
 import { Suspense } from "react";
+import { Heading, Text } from "@/components/ui/typography";
+import { PageShell, PageHeader } from "@/components/ui/page-shell";
 import { notFound } from "next/navigation";
 
 import { getBarangById } from "@/lib/services/barang.service";
@@ -37,7 +39,7 @@ async function EditContent({ params }: Props) {
   }
 
   return (
-    <Card className="max-w-2xl">
+    <Card data-motion="pop" data-motion-delay="80" className="w-full max-w-(--ds-form-max-width)">
       <CardHeader>
         <CardTitle>Edit Informasi Barang</CardTitle>
         <CardDescription>
@@ -63,19 +65,19 @@ export default function EditBarangPage({
   params,
 }: Props) {
   return (
-    <div className="space-y-6 px-4 py-6 lg:px-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">
+    <PageShell>
+      <PageHeader data-motion="rise" className="flex-col gap-1">
+        <Heading as="h1" size="page">
           Edit Barang
-        </h1>
-        <p className="text-muted-foreground">
+        </Heading>
+          <Text tone="muted">
           Ubah informasi barang tanpa memengaruhi stok.
-        </p>
-      </div>
+        </Text>
+      </PageHeader>
 
       <Suspense fallback={<p>Memuat barang...</p>}>
         <EditContent params={params} />
       </Suspense>
-    </div>
+    </PageShell>
   );
 }

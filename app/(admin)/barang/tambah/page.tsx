@@ -1,4 +1,6 @@
 import TambahBarangForm from "./form";
+import { Heading, Text } from "@/components/ui/typography";
+import { PageShell, PageHeader } from "@/components/ui/page-shell";
 
 import {
   Card,
@@ -10,17 +12,17 @@ import {
 
 export default function TambahBarangPage() {
   return (
-    <div className="space-y-6 px-4 py-6 lg:px-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">
+    <PageShell>
+      <PageHeader data-motion="rise" className="flex-col gap-1">
+        <Heading as="h1" size="page">
           Tambah Barang
-        </h1>
-        <p className="text-muted-foreground">
+        </Heading>
+          <Text tone="muted">
           Tambahkan barang baru ke sistem inventaris.
-        </p>
-      </div>
+        </Text>
+      </PageHeader>
 
-      <Card className="max-w-2xl">
+      <Card data-motion="pop" data-motion-delay="80" className="w-full max-w-(--ds-form-max-width)">
         <CardHeader>
           <CardTitle>Informasi Barang</CardTitle>
           <CardDescription>
@@ -32,6 +34,6 @@ export default function TambahBarangPage() {
           <TambahBarangForm />
         </CardContent>
       </Card>
-    </div>
+    </PageShell>
   );
 }

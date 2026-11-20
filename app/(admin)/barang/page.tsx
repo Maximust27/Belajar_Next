@@ -1,5 +1,7 @@
 
 import { Suspense } from "react";
+import { Heading, Text } from "@/components/ui/typography";
+import { PageShell, PageHeader } from "@/components/ui/page-shell";
 import Link from "next/link";
 
 import { getAllBarang } from "@/lib/services/barang.service";
@@ -23,14 +25,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { ArrowLeft, Plus, Package } from "lucide-react";
+import { Plus } from "lucide-react";
 
 // Bagian yang mengambil data database
 async function TabelBarang() {
   const barang = await getAllBarang();
 
   return (
-    <Card>
+    <Card data-motion="rise" className="min-w-0 w-full">
       <CardHeader>
         <CardTitle>Daftar Barang ({barang.length})</CardTitle>
       </CardHeader>
@@ -62,7 +64,7 @@ async function TabelBarang() {
               </TableRow>
             ) : (
               barang.map((item) => (
-                <TableRow key={item.id}>
+                <TableRow key={item.id} className="transition-colors duration-200 hover:bg-muted/50">
                   <TableCell className="font-mono text-xs">
                     {item.sku}
                   </TableCell>
@@ -115,55 +117,39 @@ async function TabelBarang() {
   );
 }
 
-// Halaman utama
+// Halaman mengikuti lebar area utama, konsisten dengan dashboard.
 export default function BarangPage() {
   return (
-    <main className="min-h-screen bg-background p-6 md:p-10">
-      <div className="mx-auto max-w-6xl space-y-6">
-
-        <Button variant="ghost" asChild>
-          <Link href="/dashboard">
-            <ArrowLeft className="mr-2 size-4" />
-            Dashboard
-          </Link>
-        </Button>
-
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="rounded-xl bg-primary/10 p-3">
-              <Package className="size-6 text-primary" />
-            </div>
-
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight">
-                Data Barang
-              </h1>
-              <p className="text-sm text-muted-foreground">
-                Kelola seluruh inventaris gudang.
-              </p>
-            </div>
-          </div>
-
-          <Button asChild>
-            <Link href="/barang/tambah">
-              <Plus className="mr-2 size-4" />
-              Tambah Barang
-            </Link>
-          </Button>
+    <PageShell>
+      <PageHeader data-motion="rise">
+        <div>
+          <Heading as="h1" size="page">
+            Data Barang
+          </Heading>
+          <Text tone="muted">
+            Kelola seluruh inventaris gudang.
+          </Text>
         </div>
 
-        <Suspense
-          fallback={
-            <Card>
-              <CardContent className="p-6">
-                Memuat data barang...
-              </CardContent>
-            </Card>
-          }
-        >
-          <TabelBarang />
-        </Suspense>
-      </div>
-    </main>
+        <Button asChild>
+          <Link href="/barang/tambah">
+            <Plus className="mr-2 size-4" />
+            Tambah Barang
+          </Link>
+        </Button>
+      </PageHeader>
+
+      <Suspense
+        fallback={
+          <Card className="min-w-0 w-full">
+            <CardContent className="p-6">
+              Memuat data barang...
+            </CardContent>
+          </Card>
+        }
+      >
+        <TabelBarang />
+      </Suspense>
+    </PageShell>
   );
 }

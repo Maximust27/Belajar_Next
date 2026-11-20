@@ -1,5 +1,7 @@
 
 import { Suspense } from "react";
+import { Heading, Text } from "@/components/ui/typography";
+import { PageShell, PageHeader } from "@/components/ui/page-shell";
 import Link from "next/link";
 import { ChevronDown, Search, RotateCcw } from "lucide-react";
 
@@ -73,7 +75,7 @@ async function RiwayatContent({ searchParams }: Props) {
   });
 
   return (
-    <Card className="overflow-hidden">
+    <Card data-motion="rise" className="overflow-hidden">
       {/* HEADER CARD */}
       <CardHeader>
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -247,7 +249,7 @@ async function RiwayatContent({ searchParams }: Props) {
                 riwayat.map((item) => (
                   <TableRow
                     key={item.id}
-                    className="hover:bg-muted/40"
+                    className="transition-colors duration-200 hover:bg-muted/40"
                   >
                     {/* TANGGAL */}
                     <TableCell className="whitespace-nowrap text-sm">
@@ -332,18 +334,17 @@ export default function RiwayatPage({
   searchParams,
 }: Props) {
   return (
-    <div className="flex flex-col gap-6 px-4 py-6 lg:px-6">
+    <PageShell>
       {/* PAGE HEADER */}
-      <div className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight">
+      <PageHeader data-motion="rise" className="flex-col gap-1">
+        <Heading as="h1" size="page">
           Riwayat Transaksi
-        </h1>
-
-        <p className="text-sm text-muted-foreground">
+        </Heading>
+          <Text tone="muted">
           Monitoring seluruh aktivitas barang masuk
           dan keluar di gudang.
-        </p>
-      </div>
+        </Text>
+      </PageHeader>
 
       {/* PAGE CONTENT */}
       <Suspense
@@ -360,6 +361,6 @@ export default function RiwayatPage({
       >
         <RiwayatContent searchParams={searchParams} />
       </Suspense>
-    </div>
+    </PageShell>
   );
 }

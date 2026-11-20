@@ -1,0 +1,97 @@
+/*
+ * Inventra UI foundations
+ * Professional intent: semantic tokens, 4px/8px spacing rhythm, restrained
+ * elevation, and comfortable (40px desktop / 44px touch) control targets.
+ * Edit values here, not individual page utilities.
+ *
+ * Tokens are globally available; only the admin UI consumes them, so the
+ * editorial landing page keeps its separate visual language.
+ */
+:root {
+  /* Spacing foundation: 4px-based scale with small increments where needed. */
+  --ds-space-0: 0;
+  --ds-space-1: 0.25rem;   /* 4px */
+  --ds-space-2: 0.5rem;    /* 8px */
+  --ds-space-3: 0.75rem;   /* 12px */
+  --ds-space-4: 1rem;      /* 16px */
+  --ds-space-5: 1.25rem;   /* 20px */
+  --ds-space-6: 1.5rem;    /* 24px */
+  --ds-space-8: 2rem;      /* 32px */
+  --ds-space-10: 2.5rem;   /* 40px */
+  --ds-space-12: 3rem;     /* 48px */
+
+  /* Semantic spacing: change a single value for consistent layouts. */
+  --ds-page-gutter: var(--ds-space-4);
+  --ds-page-padding-y: var(--ds-space-6);
+  --ds-section-gap: var(--ds-space-6);
+  --ds-grid-gap: var(--ds-space-4);
+  --ds-form-gap: var(--ds-space-5);
+  --ds-inline-gap: var(--ds-space-2);
+  --ds-card-padding: var(--ds-space-5);
+  --ds-card-padding-compact: var(--ds-space-4);
+  --ds-control-padding-x: var(--ds-space-4);
+  --ds-control-padding-x-sm: var(--ds-space-3);
+  --ds-control-padding-x-lg: var(--ds-space-5);
+  --ds-form-max-width: 42rem; /* Limit line length in forms: 672px */
+
+  /* Corner hierarchy: pill badges; controls < cards < page containers. */
+  --ds-radius-badge: 9999px;
+  --ds-radius-small: 0.375rem;   /* 6px */
+  --ds-radius-control: 0.625rem; /* 10px */
+  --ds-radius-card: 0.875rem;    /* 14px */
+  --ds-radius-panel: 1.125rem;   /* 18px */
+
+  /* UI density: functional controls remain comfortably tappable. */
+  --ds-control-height: 2.5rem;      /* 40px */
+  --ds-control-height-sm: 2.25rem;  /* 36px */
+  --ds-control-height-lg: 2.75rem;  /* 44px */
+  --ds-table-row-height: 2.75rem;   /* 44px */
+  --ds-sidebar-width: 17.5rem;      /* 280px */
+  --ds-sidebar-width-mobile: 18rem; /* 288px */
+  --ds-sidebar-width-icon: 3rem;
+  --ds-header-height: 3.5rem;       /* 56px */
+
+  /* Neutral surfaces and semantic interactions follow the existing theme. */
+  --ds-color-surface: var(--card);
+  --ds-color-surface-muted: var(--muted);
+  --ds-color-outline: var(--border);
+  --ds-color-focus: var(--ring);
+  --ds-color-action: var(--primary);
+
+  /* Subtle elevation on data-first dashboard surfaces. */
+  --ds-shadow-card: 0 1px 2px rgb(15 23 42 / 5%);
+  --ds-shadow-card-hover: 0 14px 30px -18px rgb(15 23 42 / 30%);
+  --ds-shadow-overlay: 0 18px 42px -18px rgb(15 23 42 / 35%);
+
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+  --ds-motion-fast: 160ms;
+  --ds-motion-base: 240ms;
+  --ds-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 1024px) {
+  :root { --ds-page-gutter: var(--ds-space-6); }
+}
+
+.dark {
+  --ds-shadow-card: 0 1px 2px rgb(0 0 0 / 18%);
+  --ds-shadow-card-hover: 0 14px 30px -18px rgb(0 0 0 / 62%);
+  --ds-shadow-overlay: 0 18px 42px -18px rgb(0 0 0 / 70%);
+}
+
+/* On touch input, use a 44px minimum even if a compact variant is requested. */
+@media (pointer: coarse) {
+  [data-slot="sidebar-wrapper"] [data-slot="button"],
+  [data-slot="sidebar-wrapper"] [data-slot="input"],
+  [data-slot="sidebar-wrapper"] [data-slot="select-trigger"],
+  [data-slot="sidebar-wrapper"] [data-slot="sidebar-menu-button"] {
+    min-height: var(--ds-control-height-lg);
+  }
+}
+
+/* Consistent visible keyboard focus, without removing native/radix rings. */
+[data-slot="sidebar-wrapper"] :is(a, button, input, select, textarea, [role="combobox"]):focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-color-focus);
+  outline-offset: var(--ds-focus-offset);
+}
